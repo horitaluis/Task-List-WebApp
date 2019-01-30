@@ -415,6 +415,13 @@ html {
 	}
 }
 
+@media (orientation: portrait) {
+	.main .form-new-task-container {
+		min-width: 280px;
+		min-height: 500px;
+	}
+}
+
 @media only screen and (max-width: 600px) {
 	html {
 		font-size: 16px;
