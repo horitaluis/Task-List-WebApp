@@ -198,7 +198,6 @@ html {
     max-height: 70%;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: stretch;
     position: absolute;
@@ -397,6 +396,7 @@ html {
 	.main .form-new-task {
 	    height: 15em;
 	    align-items: baseline;
+	    flex-wrap: wrap;
 	}
 
 	.main .description-fieldset {
