@@ -1,0 +1,494 @@
+/* html, css and js coding by Horita Luis, based on Task List App, design by Thomas Budiman https://dribbble.com/shots/2492038-Task-List-App */
+
+html {
+	/* definindo a fonte para todo o app */
+	font-family: sans-serif;
+	/* overflow: hidden; */
+	font-size: 26px;
+}
+
+/* classes de estilo globais */
+
+.container {
+	/* dando margem e centralizando os containers */
+	width: 90%;
+	margin: 0 auto; 
+}
+
+.hide {
+	/* escondendo o elemento */
+	display: none;
+}
+
+.phone,
+.phone__select {
+	background-image: url(../img/mobile-alt.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 1.5em;
+	width: 1.5em;
+}
+
+.phone__select {
+	width: 15em;
+    height: 2em;
+    background-size: 2em 2em;
+    background-position: 75%;
+}
+
+.brush,
+.brush__select {
+	background-image: url(../img/paint-brush.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 1.5em;
+	width: 1.5em;
+}
+
+.brush__select {
+	width: 15em;
+    height: 2em;
+    background-size: 2em 2em;
+    background-position: 75%;
+}
+
+.window,
+.window__select {
+	background-image: url(../img/window-maximize.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 1.5em;
+	width: 1.5em;
+}
+
+.window__select {
+	width: 15em;
+    height: 2em;
+    background-size: 2em 2em;
+    background-position: 75%;
+}
+
+.letter,
+.letter__select {
+	background-image: url(../img/envelope-open-text.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 1.5em;
+	width: 1.5em;
+}
+
+.letter__select {
+	width: 15em;
+    height: 2em;
+    background-size: 2em 2em;
+    background-position: 75%;
+}
+
+/* css especifico */
+
+.header {
+	/* definindo a altura pela view height para se adequar a diferentes devices */
+	height: 25vh;
+	/* coloca a imagem de fundo do header */
+	background-image: url(../img/Black_and_white_computer_desk.jpg);
+	background-size: cover;
+    background-position: bottom;
+    /* coloca um filtro de cor semitransparente por cima da imagem de fundo atraves do box-shadow inset */
+    box-shadow: inset 0 0 0 1000px rgba(78, 61, 116, 0.8);
+}
+
+.header .container {
+	/* definindo a altura do container e a margem para que a list name suba um pouco */
+	height: calc(25vh - 3em);
+	padding-top: 2em;
+	margin-bottom: 1em;
+	/* definindo o position relative para que o list-name se basei nesse elemento */
+	position: relative;
+}
+
+.header .back {
+	/* posicionando o botão back a esquerda com o float */
+	float: left;
+}
+
+.header .back-img {
+	/* definindo tamanho e cor do svg */
+	width: 2em;
+	fill: #fefefe;
+}
+
+.header .indicators {
+	/* posicionando os indicadores a direita com o float e colocando o display flex */
+	float: right;
+	display: flex;
+}
+
+.header .indicator {
+	/* definindo cor de fundo, tamanho, arredondamento e margem de cada indicator */
+	background-color: #fefefe;
+	width: .25em;
+	height: .25em;
+	border-radius: 50%;	
+	margin: .4em .2em;
+}
+
+.header .list-name {
+	/* definindo cor, font-size e posicionando o texto no fundo e a esquerda com o absolute */
+	color: #fefefe;
+	font-size: 1.25em;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+.header .btn-new-task {
+	/* Definindo a cor de fundo, tamanho, arredondamento, posição com absolute e translacao para corrigir */
+    background-color: #fd6265;
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translate( 0, 75%);
+}
+
+.header .new-task-img {
+	/* definindo o tamnho, position absolute, translate para corrigir e fill para definir a cor */
+	width: 1em;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	fill: #fefefe;
+}
+
+.main {
+	/* definindo a cor de fundo e a altura do main com o view height para se adptar aos devices */
+	height: 75vh;
+	background-color: #fefefe;
+}
+
+.main .form-new-task-container {
+	/*display: none;*/
+	width: 80vw;
+	max-width: 80%;
+	height: 80vh;
+	max-height: 80%;
+	background-color: #4e3d74;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	box-shadow: 0 0 0 1000px #000000dd;
+	color: #fff;
+}
+
+.main .title-new-task {
+	text-align: center;
+	font-size: 2em;
+	font-weight: bold;
+	padding: 1em 0;
+}
+
+.main .form-new-task {
+    width: 80vw;
+    max-width: 80%;
+    height: 80vh;
+    max-height: 70%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.main .title-new-task {
+	font-size: 1em;
+}
+
+.main .day-fieldset {
+
+}
+
+.main .icon-fieldset {
+
+}
+
+#select-icon {
+	height: 2.5em;
+	width: 8em;
+	font-size: 1em;
+}
+
+.main .name-fieldset {
+
+}
+
+.main .description-fieldset {
+
+}
+
+.main .fieldset-legend {
+	margin-bottom: .5em;
+}
+
+#taskName {
+	height: 1.25em;
+	width: 100%;
+	width: -webkit-fill-available;
+	font-size: 1em;
+}
+
+#taskDescription {
+	height: 3.75em;
+	width: 100%;
+	width: -webkit-fill-available;
+	font-size: 1em;
+}
+
+.main .form-button {
+	height: 2.25em;
+	width: max-content;
+	border: none;
+	color: #4e3d74;
+	font-size: 1em;
+	font-weight: bold;
+	background-color: #fff;
+	border-radius: .5em;
+	align-self: center;
+}
+
+.main .container {
+	
+}
+
+.main .day {
+	/* definindo margem do topo, display flex com direction colummn */
+	margin-top: 2em;
+	display: flex;
+	flex-direction: column;
+}
+
+.main .what-day {
+	/* definindo o texto como uppercase, font-size e cor */
+	text-transform: uppercase;
+	font-size: 1em;
+	color: #b2bbbd;
+}
+
+.main .task {
+	/* definindo o container como flex, justificando o conteudo com flex-start alinhando os items com center, padding de 1 em e colocando borda */
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 1em 0;
+	border-bottom: .05em solid #aaa;
+}
+
+.main .today-task {
+
+}
+
+.main .today-task:last-child {
+	/* tirando a borda da ultima task do dia de hoje */
+	border-bottom: none;
+}
+
+.tomorrow-task {
+
+}
+
+.main .checkbox {
+	/* definindo tamanho, e margem */
+	width: 1.5em;
+	height: 1.5em;
+	margin-right: 1em;
+}
+
+.main .icon {
+	/* definindo margem a direita para dar espaçamento */
+	margin-right: .5em;
+}
+
+.main .icon-img {
+	/* definindo tamanho e a cor do svg */
+	height: 1.5em;
+	width: 1.5em;
+	fill: #4e3d74;
+}
+
+.main .task-info {
+	/* definindo o line-height para aumentar o espaçamento entre as linhas */
+	line-height: 1.5;
+}
+
+.main .task-name {
+	/* definindo a cor do texto */
+	color: #4e3d74;
+}
+
+.main .task-description {
+	/* definindo font-size e cor da task description */
+	font-size: .9em;
+	color: #b2bbbd;
+}
+
+.main .favorite {
+	/* definindo a margem left como auto para que o icone seja jogado para a direita dentro de um container flex */
+	margin-left: auto;
+}
+
+.main .favorite-img {
+	/* definindo tamanho e a cor do svg */
+	width: 1.25em;
+	fill: #aaa;
+}
+
+.main .favorite-img-checked {
+	/* mudando o a cor do svg favorite que tem o atributo checked */
+	fill: #ffbc00;
+}
+
+.main .task-delete {
+	/* definindo o container como display flex e alinhando os filhos, definindo padding top e bottom para 1em e definindo  uma borda*/
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em 0;
+	border-bottom: .05em solid #aaa;
+}
+
+.main .task-name-delete {
+	/* definindo margem left para alinhar o texto com com os das tasks, cor e text decoration para dar o efeito de riscado */
+	margin-left: 4.4em;
+	color: #aaa;
+	text-decoration: line-through;
+}
+
+.main .delete {
+	background-image: url(../img/trash-alt.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 1.25em;
+	height: 1.25em;
+}
+
+.main .delete-img {
+	/* definindo o tamanho, cor e margem right do svg */
+	width: 1em;
+	fill: #aaa;
+	margin-right: .25em;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media (orientation: landscape) {
+	.main .form-new-task-container {
+		width: 80vw;
+		max-width: 80%;
+		height: 80vh;
+		max-height: 80%;
+	}
+
+	.main .form-new-task {
+	    height: 15em;
+	    align-items: baseline;
+	}
+
+	.main .description-fieldset {
+		height: 50%;
+		align-self: center;
+	}
+
+	.main .form-button {
+		align-self: center;
+	}
+
+	#taskDescription {
+	    height: 100%;
+	    max-width: 100%;
+	    width: 9.7em;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	html {
+		font-size: 16px;
+	}
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	html {
+		font-size: 18px;
+	}
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	html {
+		font-size: 20px;
+	}
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+	html {
+		font-size: 16px;
+	}
+	.main .form-new-task {
+	    height: 100%;
+	    align-items: stretch;
+	}
+
+	.main .description-fieldset {
+		height: auto;
+		align-self: stretch;
+	}
+
+	#taskDescription {
+	    height: 100%;
+   		width: 100%;
+    	width: -webkit-fill-available;
+	}
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+	html {
+		font-size: 16px;
+	}
+}
+
+/* ipad 768px x 1024px portrait */
+@media (min-width: 768px) and (min-height: 1024px) {
+	html {
+		font-size: 24px;
+	}
+}
+
+/* ipad 1024px x 768px landscape */
+@media (min-width: 1024px) and (min-height: 768px) {
+	html {
+		font-size: 24px;
+	}
+}
+
+/* ipad pro 1024px x 1366px portrait */
+@media (min-width: 1024px) and (min-height: 1366px) {
+	html {
+		font-size: 26px;
+	}
+}
+
+/* ipad pro 1366px x 1024px landscape */
+@media (min-width: 1336px) and (min-height: 1024px) {
+	html {
+		font-size: 26px;
+	}
+}
+
