@@ -385,7 +385,8 @@ html {
 }
 
 /* Extra small devices (phones, 600px and down) */
-@media (orientation: landscape) {
+/* landscape mode that work with the soft keybord of the android mobiles */
+@media screen and (min-aspect-ratio: 13/9) {
 	.main .form-new-task-container {
 		width: 80%;
 		max-width: 80%;
@@ -417,7 +418,8 @@ html {
 	}
 }
 
-@media (orientation: portrait) {
+/* portrait mode that work with the soft keybord of the android mobiles */
+@media screen and (max-aspect-ratio: 13/9) {
 	.main .form-new-task-container {
 		min-width: 280px;
 		min-height: 500px;
