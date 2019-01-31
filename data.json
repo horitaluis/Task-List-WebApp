@@ -1,0 +1,44 @@
+{
+    "tasks": [
+        {
+            "task": {
+                "id": 9746338,
+                "day": "today",
+                "icon": "phone",
+                "name": "Design onboarding screen",
+                "description": "Discuss with the dev first",
+                "favorite": true
+            }
+        },
+        {
+            "task": {
+                "id": 1835581,
+                "day": "today",
+                "icon": "brush",
+                "name": "Create a new icon set",
+                "description": "",
+                "favorite": false
+            }
+        },
+        {
+            "task": {
+                "id": 5713834,
+                "day": "tomorrow",
+                "icon": "window",
+                "name": "Code a new portifolio web",
+                "description": "",
+                "favorite": false
+            }
+        },
+        {
+            "task": {
+                "id": 3257308,
+                "day": "tomorrow",
+                "icon": "letter",
+                "name": "Send proposal email",
+                "description": "",
+                "favorite": false
+            }
+        }
+    ]
+}
