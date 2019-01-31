@@ -1,6 +1,18 @@
 // testando se o arquivo js foi carregado no html.
 console.log("teste");
 
+// criando o objeto XMLHttpRequest
+var xhr = new XMLHttpRequest();
+// fazendo o XMLHttpRequest atraves do object method open
+xhr.open("GET", "https://horitaluis.github.io/task-list-webApp/data.json");
+// enviando o request para o servidor atraves do object method send
+xhr.send();
+
+// criando um event listener para exebir os dados do json quando a pagiina é carregada
+xhr.addEventListener("load", function() {
+	console.log(xhr.responseText);
+});
+
 //criando a funcao responsavel por pegar as tasks existentes no arquivo json atraves de ajax.
 function getDataJson() {
 
