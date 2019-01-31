@@ -1,6 +1,11 @@
 // testando se o arquivo js foi carregado no html.
 console.log("teste");
 
+//criando a funcao responsavel por pegar as tasks existentes no arquivo json atraves de ajax.
+function getDataJson() {
+
+}
+
 // criando a variavel favorito e associando a ela os elementos com a classe favorite.
 var favorito = document.querySelectorAll(".favorite-img");
 console.log(favorito);
