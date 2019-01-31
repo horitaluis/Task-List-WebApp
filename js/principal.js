@@ -8,6 +8,11 @@ xhr.open("GET", "https://horitaluis.github.io/task-list-webApp/data.json");
 // enviando o request para o servidor atraves do object method send
 xhr.send();
 
+//criando funcao responsavel por popular o dom com as tasks salvas no arquivo JSON.
+function buildTasksOnLoad() {
+
+}
+
 // criando um event listener para exebir os dados do json quando a pagiina é carregada
 xhr.addEventListener("load", function() {
 	console.log(xhr.responseText);
