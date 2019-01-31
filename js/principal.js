@@ -1,12 +1,150 @@
 // testando se o arquivo js foi carregado no html.
 console.log("teste");
 
+// function que cria uma nova task a partir dos dados do form
+function createNewTask(day, icon, name, description) {
+
+	//cria os elementos da nova task e coloca seus atributos neles
+	var newTask = document.createElement("div");
+	newTask.setAttribute("class", "task")
+
+	var newCheckbox = document.createElement("input");
+	newCheckbox.setAttribute("class", "checkbox");
+	newCheckbox.setAttribute("type", "checkbox");
+	
+	newCheckbox.addEventListener("click", function() {
+		var checkbox_val = newCheckbox.value;
+	    if (newCheckbox.checked == true) {
+		    console.log("Eu checkbox fui clicado");
+
+			/* o this se refere ao elemento onde o evento esta sendo colocado 
+			(ele foi necessario pois caso o "favorito[i]"sempre retornava o ultimo
+			numero do "i")
+			e o toggle add a classe ou tira conforme ela estar no elemento ou não */
+			this.setAttribute("id", "id_you_like" + Math.random());
+			var newCheckboxId = this.id;
+			console.log(newCheckboxId);
+
+			// cria um elemento para deletar o elemento da task
+			var novoTaskDelete = document.createElement("div");
+			novoTaskDelete.setAttribute("class", "task-delete");
+			novoTaskDelete.classList.add(newCheckboxId);
+
+			var novoTaskNameDelete = document.createElement("h2");
+			novoTaskNameDelete.setAttribute("class", "task-name-delete");
+
+			console.log(this.parentNode.children[2].children[0].textContent);
+			var textoTask = this.parentNode.children[2].children[0].textContent;
+			novoTaskNameDelete.textContent = textoTask;
+
+			var novoDelete = document.createElement("a");
+			novoDelete.setAttribute("class", "delete");
+			novoDelete.setAttribute("href", "#");
+
+			var novoDeleteImg = document.createElement("svg");
+			novoDeleteImg.setAttribute("class", "delete-img");
+
+			// insere o elemento criado dentro do container
+			var container = document.querySelector(".main-container");
+			container.appendChild(novoTaskDelete);
+			novoTaskDelete.appendChild(novoTaskNameDelete);
+			novoTaskDelete.appendChild(novoDelete);
+			novoDelete.appendChild(novoDeleteImg);
+
+			
+			novoDelete.addEventListener("click", function(event) {
+				event.preventDefault();
+				console.log("Eu botao delete fui clicado");
+
+				/* o this se refere ao elemento onde o evento esta sendo colocado 
+				(ele foi necessario pois caso o "favorito[i]"sempre retornava o ultimo
+				numero do "i")
+				e o toggle add a classe ou tira conforme ela estar no elemento ou não */
+				console.log(newCheckboxId);
+				document.getElementById(newCheckboxId).parentNode.remove();
+				//document.querySelector(this.id).remove();
+				this.parentNode.remove();
+			});
+	    } else if (this.checked == false) {
+	    	// deleta a novaTaskDelete referente ao checkbox quando o checkbox é desmarcado
+			console.log("checkbox demarked");
+			document.querySelector(".task-delete").remove();
+			return;
+	    }
+	});
+
+	var newIcon = document.createElement("i");
+	newIcon.setAttribute("class", "icon");
+	newIcon.classList.add(icon);
+
+	var newInfo = document.createElement("div");
+	newInfo.setAttribute("class", "task-info");
+
+	var newName = document.createElement("h3");
+	newName.setAttribute("class", "task-name");
+	newName.textContent = name;
+
+	var newDescription = document.createElement("p");
+	newDescription.setAttribute("class", "task-description");
+	newDescription.textContent = description;
+
+	var newFavorite = document.createElement("a");
+	newFavorite.setAttribute("class", "favorite");
+	newFavorite.setAttribute("href", "#");
+
+	/* note que para criar elementos svg com js precisamos usar o metodo createElementsNS
+	 onde passamos "http://www.w3.org/2000/svg" e a sua tag como argumentos */
+	var newFavoriteImg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+	newFavoriteImg.setAttribute("class", "favorite-img");
+	newFavoriteImg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+	newFavoriteImg.setAttribute("viewBox", "0 0 576 512");
+	// newFavoriteImg.setAttribute("fill", "#000");
+
+	var newFavoritePath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+	newFavoritePath.setAttribute("d", "M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z");
+
+	newFavoriteImg.addEventListener("click", function(event) {
+		event.preventDefault();
+		console.log("Eu botao favorito fui clicado");
+
+		/* o this se refere ao elemento onde o evento esta sendo colocado 
+		(ele foi necessario pois caso o "favorito[i]"sempre retornava o ultimo
+		numero do "i")
+		e o toggle add a classe ou tira conforme ela estar no elemento ou não */
+		this.classList.toggle("favorite-img-checked");
+	});
+
+	// coloca um elemento dentro do outro no dom
+	newTask.appendChild(newCheckbox);
+	newTask.appendChild(newIcon);
+	newTask.appendChild(newInfo);
+	newInfo.appendChild(newName);
+	newInfo.appendChild(newDescription);
+	newTask.appendChild(newFavorite);
+	newFavorite.appendChild(newFavoriteImg);
+	newFavoriteImg.appendChild(newFavoritePath);
+
+	// usando if/else para verificar em qual dia colocar as nova task
+	if (day == "today") {
+		var todayContainer = document.querySelector(".today-container");
+		todayContainer.appendChild(newTask);
+	} else if (day == "tomorrow") {
+		var tomorrowContainer = document.querySelector(".tomorrow-container");
+		tomorrowContainer.appendChild(newTask);
+	}
+}
+
 // criando o objeto XMLHttpRequest
 var xhr = new XMLHttpRequest();
 // fazendo o XMLHttpRequest atraves do object method open
 xhr.open("GET", "https://horitaluis.github.io/task-list-webApp/data.json");
 // enviando o request para o servidor atraves do object method send
 xhr.send();
+
+//criando funcao responsavel por popular o dom com as tasks salvas no arquivo JSON.
+function buildTasksOnLoad() {
+	console.log(tasks);
+}
 
 // criando um event listener para exebir os dados do json quando a pagiina é carregada
 xhr.addEventListener("load", function() {
@@ -15,6 +153,7 @@ xhr.addEventListener("load", function() {
 	var response = xhr.responseText;
 	// convertendo o JSON em objeto JS com o method parse.
 	var tasks = JSON.parse(response);
+	buildTasksOnLoad();
 });
 
 //criando a funcao responsavel por pegar as tasks existentes no arquivo json atraves de ajax.
@@ -195,140 +334,6 @@ function getDropDownListValue(name) {
 	if(selected_index > 0)
 	{
 	   return oForm.elements[name].options[selected_index].value;
-	}
-}
-
-
-// function que cria uma nova task a partir dos dados do form
-function createNewTask(day, icon, name, description) {
-
-	//cria os elementos da nova task e coloca seus atributos neles
-	var newTask = document.createElement("div");
-	newTask.setAttribute("class", "task")
-
-	var newCheckbox = document.createElement("input");
-	newCheckbox.setAttribute("class", "checkbox");
-	newCheckbox.setAttribute("type", "checkbox");
-	
-	newCheckbox.addEventListener("click", function() {
-		var checkbox_val = newCheckbox.value;
-	    if (newCheckbox.checked == true) {
-		    console.log("Eu checkbox fui clicado");
-
-			/* o this se refere ao elemento onde o evento esta sendo colocado 
-			(ele foi necessario pois caso o "favorito[i]"sempre retornava o ultimo
-			numero do "i")
-			e o toggle add a classe ou tira conforme ela estar no elemento ou não */
-			this.setAttribute("id", "id_you_like" + Math.random());
-			var newCheckboxId = this.id;
-			console.log(newCheckboxId);
-
-			// cria um elemento para deletar o elemento da task
-			var novoTaskDelete = document.createElement("div");
-			novoTaskDelete.setAttribute("class", "task-delete");
-			novoTaskDelete.classList.add(newCheckboxId);
-
-			var novoTaskNameDelete = document.createElement("h2");
-			novoTaskNameDelete.setAttribute("class", "task-name-delete");
-
-			console.log(this.parentNode.children[2].children[0].textContent);
-			var textoTask = this.parentNode.children[2].children[0].textContent;
-			novoTaskNameDelete.textContent = textoTask;
-
-			var novoDelete = document.createElement("a");
-			novoDelete.setAttribute("class", "delete");
-			novoDelete.setAttribute("href", "#");
-
-			var novoDeleteImg = document.createElement("svg");
-			novoDeleteImg.setAttribute("class", "delete-img");
-
-			// insere o elemento criado dentro do container
-			var container = document.querySelector(".main-container");
-			container.appendChild(novoTaskDelete);
-			novoTaskDelete.appendChild(novoTaskNameDelete);
-			novoTaskDelete.appendChild(novoDelete);
-			novoDelete.appendChild(novoDeleteImg);
-
-			
-			novoDelete.addEventListener("click", function(event) {
-				event.preventDefault();
-				console.log("Eu botao delete fui clicado");
-
-				/* o this se refere ao elemento onde o evento esta sendo colocado 
-				(ele foi necessario pois caso o "favorito[i]"sempre retornava o ultimo
-				numero do "i")
-				e o toggle add a classe ou tira conforme ela estar no elemento ou não */
-				console.log(newCheckboxId);
-				document.getElementById(newCheckboxId).parentNode.remove();
-				//document.querySelector(this.id).remove();
-				this.parentNode.remove();
-			});
-	    } else if (this.checked == false) {
-	    	// deleta a novaTaskDelete referente ao checkbox quando o checkbox é desmarcado
-			console.log("checkbox demarked");
-			document.querySelector(".task-delete").remove();
-			return;
-	    }
-	});
-
-	var newIcon = document.createElement("i");
-	newIcon.setAttribute("class", "icon");
-	newIcon.classList.add(icon);
-
-	var newInfo = document.createElement("div");
-	newInfo.setAttribute("class", "task-info");
-
-	var newName = document.createElement("h3");
-	newName.setAttribute("class", "task-name");
-	newName.textContent = name;
-
-	var newDescription = document.createElement("p");
-	newDescription.setAttribute("class", "task-description");
-	newDescription.textContent = description;
-
-	var newFavorite = document.createElement("a");
-	newFavorite.setAttribute("class", "favorite");
-	newFavorite.setAttribute("href", "#");
-
-	/* note que para criar elementos svg com js precisamos usar o metodo createElementsNS
-	 onde passamos "http://www.w3.org/2000/svg" e a sua tag como argumentos */
-	var newFavoriteImg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-	newFavoriteImg.setAttribute("class", "favorite-img");
-	newFavoriteImg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-	newFavoriteImg.setAttribute("viewBox", "0 0 576 512");
-	// newFavoriteImg.setAttribute("fill", "#000");
-
-	var newFavoritePath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-	newFavoritePath.setAttribute("d", "M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z");
-
-	newFavoriteImg.addEventListener("click", function(event) {
-		event.preventDefault();
-		console.log("Eu botao favorito fui clicado");
-
-		/* o this se refere ao elemento onde o evento esta sendo colocado 
-		(ele foi necessario pois caso o "favorito[i]"sempre retornava o ultimo
-		numero do "i")
-		e o toggle add a classe ou tira conforme ela estar no elemento ou não */
-		this.classList.toggle("favorite-img-checked");
-	});
-
-	// coloca um elemento dentro do outro no dom
-	newTask.appendChild(newCheckbox);
-	newTask.appendChild(newIcon);
-	newTask.appendChild(newInfo);
-	newInfo.appendChild(newName);
-	newInfo.appendChild(newDescription);
-	newTask.appendChild(newFavorite);
-	newFavorite.appendChild(newFavoriteImg);
-	newFavoriteImg.appendChild(newFavoritePath);
-
-	// usando if/else para verificar em qual dia colocar as nova task
-	if (day == "today") {
-		var todayContainer = document.querySelector(".today-container");
-		todayContainer.appendChild(newTask);
-	} else if (day == "tomorrow") {
-		var tomorrowContainer = document.querySelector(".tomorrow-container");
-		tomorrowContainer.appendChild(newTask);
 	}
 }
 
