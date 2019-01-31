@@ -143,7 +143,7 @@ xhr.send();
 
 //criando funcao responsavel por popular o dom com as tasks salvas no arquivo JSON.
 function buildTasksOnLoad() {
-
+	console.log(tasks);
 }
 
 // criando um event listener para exebir os dados do json quando a pagiina é carregada
@@ -153,6 +153,7 @@ xhr.addEventListener("load", function() {
 	var response = xhr.responseText;
 	// convertendo o JSON em objeto JS com o method parse.
 	var tasks = JSON.parse(response);
+	buildTasksOnLoad();
 });
 
 //criando a funcao responsavel por pegar as tasks existentes no arquivo json atraves de ajax.
