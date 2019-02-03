@@ -155,6 +155,18 @@ xhr.addEventListener("load", function() {
 	// convertendo o JSON em objeto JS com o method parse.
 	var tasks = JSON.parse(response);
 	buildTasksOnLoad();
+	tasks.forEach(function(i) {
+		var taskId = task[i].id;
+		console.log(taskId);
+		var taskDay = task[i].day;
+		console.log(taskDay);
+		var taskIcon = task[i].icon;
+		console.log(taskIcon);
+		var taskName = task[i].name;
+		console.log(taskName);
+		var taskDescription = task[i].description;
+		console.log(taskDescription);
+	});
 });
 
 //criando a funcao responsavel por pegar as tasks existentes no arquivo json atraves de ajax.
