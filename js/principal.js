@@ -2,11 +2,12 @@
 console.log("teste");
 
 // function que cria uma nova task a partir dos dados do form
-function createNewTask(day, icon, name, description) {
+function createNewTask(day, icon, name, description, identification) {
 
 	//cria os elementos da nova task e coloca seus atributos neles
 	var newTask = document.createElement("div");
-	newTask.setAttribute("class", "task")
+	newTask.setAttribute("class", "task");
+	newTask.setAttribute("id", identification);
 
 	var newCheckbox = document.createElement("input");
 	newCheckbox.setAttribute("class", "checkbox");
@@ -143,7 +144,7 @@ xhr.send();
 
 //criando funcao responsavel por popular o dom com as tasks salvas no arquivo JSON.
 function buildTasksOnLoad() {
-	
+	console.log(tasks);
 }
 
 // criando um event listener para exebir os dados do json quando a pagiina é carregada
@@ -153,7 +154,19 @@ xhr.addEventListener("load", function() {
 	var response = xhr.responseText;
 	// convertendo o JSON em objeto JS com o method parse.
 	var tasks = JSON.parse(response);
-	console.log(tasks);
+	buildTasksOnLoad();
+	tasks.forEach(function(i) {
+		var taskId = task[i].id;
+		console.log(taskId);
+		var taskDay = task[i].day;
+		console.log(taskDay);
+		var taskIcon = task[i].icon;
+		console.log(taskIcon);
+		var taskName = task[i].name;
+		console.log(taskName);
+		var taskDescription = task[i].description;
+		console.log(taskDescription);
+	});
 });
 
 //criando a funcao responsavel por pegar as tasks existentes no arquivo json atraves de ajax.
