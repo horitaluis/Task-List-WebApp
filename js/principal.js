@@ -155,7 +155,7 @@ xhr.addEventListener("load", function() {
 	// convertendo o JSON em objeto JS com o method parse.
 	var tasks = JSON.parse(response);
 	var i = 0;
-	tasks.forEach(function(i) {
+	tasks.forEach(data, function(i) {
 		var taskId = tasks[i].id;
 		console.log(taskId);
 		var taskDay = tasks[i].day;
