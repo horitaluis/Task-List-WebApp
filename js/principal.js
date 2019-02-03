@@ -2,11 +2,12 @@
 console.log("teste");
 
 // function que cria uma nova task a partir dos dados do form
-function createNewTask(day, icon, name, description) {
+function createNewTask(day, icon, name, description, identification) {
 
 	//cria os elementos da nova task e coloca seus atributos neles
 	var newTask = document.createElement("div");
-	newTask.setAttribute("class", "task")
+	newTask.setAttribute("class", "task");
+	newTask.setAttribute("id", identification);
 
 	var newCheckbox = document.createElement("input");
 	newCheckbox.setAttribute("class", "checkbox");
