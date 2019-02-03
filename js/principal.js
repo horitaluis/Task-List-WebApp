@@ -166,6 +166,7 @@ xhr.addEventListener("load", function() {
 		var taskDescription = tasks[i].description;
 		console.log(taskDescription);
 		console.log( i + " ok");
+		return console.log(taskId + taskDay + taskIcon + taskName + taskDescription);
 	}
 });
 
