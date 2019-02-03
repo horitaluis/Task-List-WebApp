@@ -152,10 +152,10 @@ xhr.addEventListener("load", function() {
 	console.log(xhr.responseText);
 	// atribuindo a variavel response a resposta em texto da requesicao.
 	var response = xhr.responseText;
+	taskId1 = response.tasks.task[0].id;
+	console.log(taskId1);
 	// convertendo o JSON em objeto JS com o method parse.
 	var tasks = JSON.parse(response);
-	taskId1 = tasks["task"].id;
-	console.log(taskId1);
 });
 
 //criando a funcao responsavel por pegar as tasks existentes no arquivo json atraves de ajax.
