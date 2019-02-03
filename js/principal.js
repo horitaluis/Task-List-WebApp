@@ -154,7 +154,7 @@ xhr.addEventListener("load", function() {
 	var response = xhr.responseText;
 	// convertendo o JSON em objeto JS com o method parse.
 	var tasks = JSON.parse(response);
-	taskId1 = tasks.task[0].id;
+	taskId1 = tasks.task.id;
 	console.log(taskId1);
 });
 
