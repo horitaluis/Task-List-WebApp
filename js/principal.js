@@ -154,20 +154,20 @@ xhr.addEventListener("load", function() {
 	var response = xhr.responseText;
 	// convertendo o JSON em objeto JS com o method parse.
 	var tasks = JSON.parse(response);
-	console.log(tasks.task);
-	// for (var i = 0; i < tasks.length; i++) {
-	// 	var taskId = tasks[i].id;
-	// 	console.log(taskId);
-	// 	var taskDay = tasks[i].day;
-	// 	console.log(taskDays);
-	// 	var taskIcon = tasks[i].icon;
-	// 	console.log(taskIcon);
-	// 	var taskName = tasks[i].name;
-	// 	console.log(taskName);
-	// 	var taskDescription = tasks[i].description;
-	// 	console.log(taskDescription);
-	// 	console.log( i + " ok");
-	// }
+	console.log(tasks[0].task.id);
+	for (var i = 0; i < tasks.length; i++) {
+		var taskId = tasks[i].task.id;
+		console.log(taskId);
+		var taskDay = tasks[i].task.day;
+		console.log(taskDays);
+		var taskIcon = tasks[i].task.icon;
+		console.log(taskIcon);
+		var taskName = tasks[i].task.name;
+		console.log(taskName);
+		var taskDescription = tasks[i].task.description;
+		console.log(taskDescription);
+		console.log( i + " ok");
+	}
 });
 
 //criando a funcao responsavel por pegar as tasks existentes no arquivo json atraves de ajax.
