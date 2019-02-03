@@ -156,16 +156,17 @@ xhr.addEventListener("load", function() {
 	var tasks = JSON.parse(response);
 	buildTasksOnLoad();
 	tasks.forEach(function(i) {
-		var taskId = task[i].id;
+		var taskId = tasks[i].id;
 		console.log(taskId);
-		var taskDay = task[i].day;
-		console.log(taskDay);
-		var taskIcon = task[i].icon;
+		var taskDay = tasks[i].day;
+		console.log(taskDays);
+		var taskIcon = tasks[i].icon;
 		console.log(taskIcon);
-		var taskName = task[i].name;
+		var taskName = tasks[i].name;
 		console.log(taskName);
-		var taskDescription = task[i].description;
+		var taskDescription = tasks[i].description;
 		console.log(taskDescription);
+		console.log( i + " ok");
 	});
 });
 
