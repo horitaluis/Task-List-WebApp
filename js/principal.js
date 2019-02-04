@@ -161,8 +161,9 @@ function getDataJson() {
 //criando funcao responsavel por popular o dom com as tasks salvas no arquivo JSON.
 function populateTasks(tasksJson) {
 	console.log(tasksJson);
-	for (var i = 0; i < tasksJson.length; i++) {
-		var taskId = tasksJson[i].id;
+	var tasks = tasksJson.tasks;
+	for (var i = 0; i < tasks.length; i++) {
+		var taskId = tasksJson.tasks[i].id;
 		console.log(taskId);
 	}
 }
