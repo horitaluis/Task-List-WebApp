@@ -159,7 +159,7 @@ function getDataJson() {
 }
 
 //criando funcao responsavel por popular o dom com as tasks salvas no arquivo JSON.
-function populateTasks() {
+function populateTasks(tasksJson) {
 	console.log(tasksJson);
 }
 
