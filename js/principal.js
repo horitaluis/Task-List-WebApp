@@ -168,6 +168,9 @@ function populateTasks(tasksJson) {
 		var taskId = tasksJson.tasks[i].id;
 		console.log(taskId);
 
+		var taskDay = tasksJson.tasks[i].day;
+		console.log(taskDay);
+
 		var taskIcon = tasksJson.tasks[i].icon;
 		console.log(taskIcon);
 
