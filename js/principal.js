@@ -161,6 +161,10 @@ function getDataJson() {
 //criando funcao responsavel por popular o dom com as tasks salvas no arquivo JSON.
 function populateTasks(tasksJson) {
 	console.log(tasksJson);
+	for (var i = 0; i < tasksJson.length; i++) {
+		var taskId = tasksJson[i].id;
+		console.log(taskId);
+	}
 }
 
 // criando a variavel favorito e associando a ela os elementos com a classe favorite.
