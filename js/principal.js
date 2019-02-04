@@ -162,9 +162,23 @@ function getDataJson() {
 function populateTasks(tasksJson) {
 	console.log(tasksJson);
 	var tasks = tasksJson.tasks;
+	
 	for (var i = 0; i < tasks.length; i++) {
+
 		var taskId = tasksJson.tasks[i].id;
 		console.log(taskId);
+
+		var taskId = tasksJson.tasks[i].icon;
+		console.log(taskIcon);
+
+		var taskId = tasksJson.tasks[i].name;
+		console.log(taskName);
+
+		var taskId = tasksJson.tasks[i].description;
+		console.log(taskDescription);
+
+		var taskId = tasksJson.tasks[i].favorite;
+		console.log(taskFavorite);
 	}
 }
 
