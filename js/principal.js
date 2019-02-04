@@ -431,3 +431,7 @@ formButton.addEventListener("click", function(event) {
 	}
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+	getDataJson();
+});
+
