@@ -149,8 +149,8 @@ function getDataJson() {
 		// atribuindo a variavel response a resposta em texto da requesicao.
 		var response = xhr.responseText;
 		// convertendo o JSON em objeto JS com o method parse.
-		var tasks = JSON.parse(response);
-		populateTasks(tasks);
+		var tasksJson = JSON.parse(response);
+		populateTasks(tasksJson);
 	});
 
 	// enviando o request para o servidor atraves do object method send
@@ -160,7 +160,7 @@ function getDataJson() {
 
 //criando funcao responsavel por popular o dom com as tasks salvas no arquivo JSON.
 function populateTasks() {
-	console.log(tasks);
+	console.log(tasksJson);
 }
 
 // criando a variavel favorito e associando a ela os elementos com a classe favorite.
