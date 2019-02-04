@@ -188,6 +188,9 @@ function populateTasks(tasksJson) {
 
 		var taskFavorite = tasksJson.tasks[i].favorite;
 		console.log(taskFavorite);
+
+		// chamando a funcao createNewTask para popular o DOM a partir dos dados obtidos pelo JSON
+		createNewTask(taskDay, taskIcon, taskName, taskDescription, taskFavorite, taskId);
 	}
 }
 
