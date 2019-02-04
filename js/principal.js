@@ -135,30 +135,32 @@ function createNewTask(day, icon, name, description, identification) {
 	}
 }
 
-// criando o objeto XMLHttpRequest
-var xhr = new XMLHttpRequest();
-// fazendo o XMLHttpRequest atraves do object method open
-xhr.open("GET", "https://horitaluis.github.io/task-list-webApp/data.json");
-// enviando o request para o servidor atraves do object method send
-xhr.send();
-
-//criando funcao responsavel por popular o dom com as tasks salvas no arquivo JSON.
-function buildTasksOnLoad() {
-	
-}
-
-// criando um event listener para exebir os dados do json quando a pagiina é carregada
-xhr.addEventListener("load", function() {
-	console.log(xhr.responseText);
-	// atribuindo a variavel response a resposta em texto da requesicao.
-	var response = xhr.responseText;
-	// convertendo o JSON em objeto JS com o method parse.
-	var tasks = JSON.parse(response);
-});
-
 //criando a funcao responsavel por pegar as tasks existentes no arquivo json atraves de ajax.
 function getDataJson() {
 
+	// criando o objeto XMLHttpRequest
+	var xhr = new XMLHttpRequest();
+	// fazendo o XMLHttpRequest atraves do object method open
+	xhr.open("GET", "https://horitaluis.github.io/task-list-webApp/data.json");
+
+	// criando um event listener para exebir os dados do json quando a pagiina é carregada
+	xhr.addEventListener("load", function() {
+		console.log(xhr.responseText);
+		// atribuindo a variavel response a resposta em texto da requesicao.
+		var response = xhr.responseText;
+		// convertendo o JSON em objeto JS com o method parse.
+		var tasks = JSON.parse(response);
+		populateTasks(tasks);
+	});
+
+	// enviando o request para o servidor atraves do object method send
+	xhr.send();
+
+}
+
+//criando funcao responsavel por popular o dom com as tasks salvas no arquivo JSON.
+function populateTasks() {
+	console.log(tasks);
 }
 
 // criando a variavel favorito e associando a ela os elementos com a classe favorite.
