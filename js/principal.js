@@ -157,7 +157,7 @@ function getDataJson() {
 		// convertendo o JSON em objeto JS com o method parse.
 		var tasksJson = JSON.parse(response);
 	    // Armazenando
-	    localStorage.setItem(taskJson);
+	    localStorage.setItem(tasksJson);
 	    // Recuperando
 	    alert(localStorage.getItem(tasksJson.tasks[0].id));
 		populateTasks(tasksJson);
