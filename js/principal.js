@@ -156,13 +156,10 @@ function getDataJson() {
 		var response = xhr.responseText;
 		// convertendo o JSON em objeto JS com o method parse.
 		var tasksJson = JSON.parse(response);
-		// Checando o suporte do navegador
-		if (typeof(Storage) !== "undefined") {
-		  // Armazenando
-		  localStorage.setItem(taskJson);
-		  // Recuperando
-		  alert(localStorage.getItem(tasksJson.tasks[0].id));
-		}
+	    // Armazenando
+	    localStorage.setItem(taskJson);
+	    // Recuperando
+	    alert(localStorage.getItem(tasksJson.tasks[0].id));
 		populateTasks(tasksJson);
 	});
 
