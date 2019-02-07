@@ -427,9 +427,42 @@ formButton.addEventListener("click", function(event) {
 	} else if (taskName.length == 0) {
 		alert("Insert the task name");
 	} else {
-		createNewTask(dayRadio, iconRadio, taskName, taskDescription);
+		// gerando randomicamente a id da nova task
+		var taskId = Math.floor(Math.random() * 10000000) + 1;
+		// chamando a function que cria a nova task
+		createNewTask(dayRadio, iconRadio, taskName, taskDescription, false, taskId);
 		alert("Task " + taskName + " successfully saved");
 		var formNewTaskContainer = document.querySelector(".form-new-task-container");
+		// criando o novo objeto js referente a new task
+		var newTaskObject = {id: taskId, day: dayRadio, icon: iconRadio, name: taskName, description: taskDescription, favorite: false};
+		// montando um if para caso o localStorage item updated-tasks não existir pegar o loaded-tasks
+		if (localStorage.getItem("updated-tasks") == undefined) {
+			// pegar o localStorage item loaded-tasks
+			var loadedResponse = localStorage.getItem("loaded-tasks");
+			// passar a var loadedResonse como valor do novo localStorage item updated-tasks 
+			localStorage.setItem("updated-tasks", loadedResponse);
+			// pegar o localStorage item updated-tasks
+	    	var retrievedResponse = localStorage.getItem("updated-tasks");
+		} else {
+			// pegar direto o localStorage item updated-tasks
+	    	var retrievedResponse = localStorage.getItem("updated-tasks");
+		}
+	    // fazendo o parse do localStorage atual para transformalo em objeto js
+	    var tasksJson = JSON.parse(retrievedResponse);
+	    // fazendo o push do nava task objeto js no loaded-tasks localstorage
+	    tasksJson.tasks.push(newTaskObject);
+	    // testando o tasksJson apos o push
+	    console.log(tasksJson.tasks);
+	    // fazendo o stringfy da tasksJson
+	    var stringTasksJson = JSON.stringify(tasksJson);
+		// Armazenando localmente a nova task
+	    localStorage.setItem("updated-tasks", stringTasksJson);
+	    // Recuperando o que esta armazenado
+	    var newTaskResponse = localStorage.getItem("updated-tasks");
+		// convertendo o JSON em objeto JS com o method parse.
+		var newTasksJson = JSON.parse(newTaskResponse);
+		// verificando a newTasksJson
+		console.log(newTasksJson);		
 		// escondendo o modal após salvar a nova task
 		formNewTaskContainer.classList.toggle("hide");
 	}
