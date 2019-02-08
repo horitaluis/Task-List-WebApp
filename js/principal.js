@@ -154,10 +154,16 @@ function getDataJson() {
 		console.log(xhr.responseText);
 		// atribuindo a variavel response a resposta em texto da requesicao.
 		var response = xhr.responseText;
-	    // Armazenando localmente
-	    localStorage.setItem("loaded-tasks", response);
-	    // Recuperando o que esta armazenado
-	    var retrievedResponse = localStorage.getItem("loaded-tasks");
+		// criando um if/else que verifica se existe o item updated-tasks no localStorage
+		if (localStorage.getItem("updated-tasks") == undefined) {
+			// Armazenando localmente
+		    localStorage.setItem("loaded-tasks", response);
+		    // Recuperando o que esta armazenado
+	    	var retrievedResponse = localStorage.getItem("loaded-tasks");
+		} else {
+			// Recuperando o que esta armazenado no updated-tasks
+			var retrievedResponse = localStorage.getItem("updated-tasks");
+		}
 		// convertendo o JSON em objeto JS com o method parse.
 		var tasksJson = JSON.parse(retrievedResponse);
 		populateTasks(tasksJson);
