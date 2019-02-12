@@ -7,7 +7,7 @@ function createNewTask(day, icon, name, description, favorite, identification) {
 	//cria os elementos da nova task e coloca seus atributos neles
 	var newTask = document.createElement("div");
 	newTask.setAttribute("class", "task");
-	newTask.setAttribute("id", identification);
+	var newTaskId = newTask.setAttribute("id", identification);
 
 	var newCheckbox = document.createElement("input");
 	newCheckbox.setAttribute("class", "checkbox");
@@ -61,7 +61,32 @@ function createNewTask(day, icon, name, description, favorite, identification) {
 				(ele foi necessario pois caso o "favorito[i]"sempre retornava o ultimo
 				numero do "i")
 				e o toggle add a classe ou tira conforme ela estar no elemento ou não */
-				console.log(newCheckboxId);
+				console.log(newTaskId);
+				// fazer com que quando o botao delete for clicado, tirar a task referente a ele do localStorage item updated-tasks
+				
+				// montando um if para caso o localStorage item updated-tasks não existir pegar o loaded-tasks
+				if (localStorage.getItem("updated-tasks") == undefined) {
+					// pegar o localStorage item loaded-tasks
+					var loadedResponse = localStorage.getItem("loaded-tasks");
+					// passar a var loadedResonse como valor do novo localStorage item updated-tasks 
+					localStorage.setItem("updated-tasks", loadedResponse);
+					// pegar o localStorage item updated-tasks
+			    	var retrievedResponse = localStorage.getItem("updated-tasks");
+				} else {
+					// pegar direto o localStorage item updated-tasks
+			    	var retrievedResponse = localStorage.getItem("updated-tasks");
+				}
+			    // fazendo o parse do localStorage atual para transformalo em objeto js
+			    var tasksJson = JSON.parse(retrievedResponse);
+			    // selecionando a task a ser deletada pelo id referente a ela
+			    tasksJson.tasks.splice(tasksJson.tasks.indexOf(newTaskId), 1);
+			    // testando o tasksJson apos o splice
+			    console.log(tasksJson.tasks);
+			    // fazendo o stringfy da tasksJson
+			    var stringTasksJson = JSON.stringify(tasksJson);
+				// Armazenando localmente a nova task
+			    localStorage.setItem("updated-tasks", stringTasksJson);
+
 				document.getElementById(newCheckboxId).parentNode.remove();
 				//document.querySelector(this.id).remove();
 				this.parentNode.remove();
