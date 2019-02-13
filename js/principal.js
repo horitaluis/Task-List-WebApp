@@ -138,6 +138,35 @@ function createNewTask(day, icon, name, description, favorite, identification) {
 	newFavoriteImg.addEventListener("click", function(event) {
 		event.preventDefault();
 		console.log("Eu botao favorito fui clicado");
+		// fazer com que quando o botao favirite for clicado, modificar o valor referente a ele do localStorage item updated-tasks
+			
+		// montando um if para caso o localStorage item updated-tasks não existir pegar o loaded-tasks
+		if (localStorage.getItem("updated-tasks") == undefined) {
+			// pegar o localStorage item loaded-tasks
+			var loadedResponse = localStorage.getItem("loaded-tasks");
+			// passar a var loadedResonse como valor do novo localStorage item updated-tasks 
+			localStorage.setItem("updated-tasks", loadedResponse);
+			// pegar o localStorage item updated-tasks
+	    	var retrievedResponse = localStorage.getItem("updated-tasks");
+		} else {
+			// pegar direto o localStorage item updated-tasks
+	    	var retrievedResponse = localStorage.getItem("updated-tasks");
+		}
+	    // fazendo o parse do localStorage atual para transformalo em objeto js
+	    var tasksJson = JSON.parse(retrievedResponse);
+	    // selecionando a task a ser modificada pelo id referente a ela
+	    var tasksJsonFavorite = tasksJson.tasks.indexOf(newTaskId)["favorite"];
+	    if (tasksJsonFavorite == true) {
+	    	console.log("favorite value modified to false");
+	    } else if (tasksJsonFavorite == false) {
+	    	console.log("favorite value modified to true");
+	    }
+	    // testando o tasksJson apos o valor do favorite ser modificado
+	    console.log(tasksJson.tasks);
+	    // fazendo o stringfy da tasksJson
+	    var stringTasksJson = JSON.stringify(tasksJson);
+		// Armazenando localmente a nova task
+	    localStorage.setItem("updated-tasks", stringTasksJson);
 
 		/* o this se refere ao elemento onde o evento esta sendo colocado 
 		(ele foi necessario pois caso o "favorito[i]"sempre retornava o ultimo
