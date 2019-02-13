@@ -156,6 +156,8 @@ function createNewTask(day, icon, name, description, favorite, identification) {
 	    var tasksJson = JSON.parse(retrievedResponse);
 	    // selecionando a task a ser modificada pelo id referente a ela
 	    var tasksJsonFavorite = tasksJson.tasks.indexOf(newTaskId)["favorite"];
+	    // testando o que sai do tasksJsonFacorite
+	    console.log(tasksJsonFavorite);
 	    if (tasksJsonFavorite == true) {
 	    	console.log("favorite value modified to false");
 	    } else if (tasksJsonFavorite == false) {
