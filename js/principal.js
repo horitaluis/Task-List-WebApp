@@ -154,14 +154,21 @@ function createNewTask(day, icon, name, description, favorite, identification) {
 		}
 	    // fazendo o parse do localStorage atual para transformalo em objeto js
 	    var tasksJson = JSON.parse(retrievedResponse);
-	    // selecionando a task a ser modificada pelo id referente a ela
-	    var tasksJsonFavorite = tasksJson.tasks.indexOf(newTaskId)["favorite"];
+	    // encontra o objeto especifico atravez do method findIndex usando o id
+	    var tasksJsonById = tasksJson.tasks.findIndex((obj => tasksJson.tasks.id == newTaskId));
+	    // selecionando o favorite do objeto encontrado
+	    var tasksJsonFavorite = tasksJsonById.favorite;
 	    // testando o que sai do tasksJsonFacorite
 	    console.log(tasksJsonFavorite);
+	    // criando um if para mudar o valor do favorite referente ao objeto
 	    if (tasksJsonFavorite == true) {
 	    	console.log("favorite value modified to false");
+	    	// modificando o valor para false
+	    	tasksJsonFavorite = false;
 	    } else if (tasksJsonFavorite == false) {
 	    	console.log("favorite value modified to true");
+	    	// modificando o valor para true
+	    	tasksJsonFavorite = true;
 	    }
 	    // testando o tasksJson apos o valor do favorite ser modificado
 	    console.log(tasksJson.tasks);
